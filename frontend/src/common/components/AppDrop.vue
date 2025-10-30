@@ -16,7 +16,7 @@ function onDrop({ dataTransfer }) {
   const payload = dataTransfer.getData(DATA_TRANSFER_PAYLOAD);
   if (payload) {
     const transferData = JSON.parse(
-        dataTransfer.getData(DATA_TRANSFER_PAYLOAD)
+      dataTransfer.getData(DATA_TRANSFER_PAYLOAD)
     );
     emit("drop", transferData);
   }
