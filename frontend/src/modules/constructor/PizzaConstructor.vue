@@ -15,7 +15,7 @@
         <div
           class="pizza"
           :class="`pizza--foundation--${
-            pizzaDough === 1 ? 'light' : 'large'
+            pizzaDough === 1 ? 'small' : 'big'
           }-${getEntityValue(
             getEntity(pizzaSauce, 'sauce').name.toLowerCase()
           )}`"
