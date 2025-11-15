@@ -1,6 +1,41 @@
 <template>
-  <AppLayout />
+  <AppLayout>
+    <router-view />
+  </AppLayout>
 </template>
+
 <script setup>
+import { onMounted } from "vue";
+import { useDataStore, useProfileStore } from "./store";
+import { getToken, removeToken } from "./services/tokenManager";
+import { useAuthStore } from "./store";
 import AppLayout from "./layouts/AppLayout.vue";
+import router from "./router";
+
+const { fetchDough, fetchSizes, fetchSauces, fetchMisc, fetchIngredients } =
+  useDataStore();
+const { fetchAddresses, fetchOrders } = useProfileStore();
+
+onMounted(async () => {
+  await fetchDough();
+  await fetchSizes();
+  await fetchSauces();
+  await fetchMisc();
+  await fetchIngredients();
+  await fetchAddresses();
+  await fetchOrders();
+
+  const token = getToken();
+  if (token) {
+    try {
+      const authStore = useAuthStore();
+      authStore.getMe().then(() => {
+        router.push({ name: "main" });
+      });
+    } catch (e) {
+      removeToken();
+      console.log(e);
+    }
+  }
+});
 </script>
