@@ -33,3 +33,7 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+### Тестовый юзер
+
+user@example.com
