@@ -72,11 +72,10 @@ export const useCartStore = defineStore("cart", () => {
   });
 
   const addPizzaToCart = (name) => {
-    const { pizzaIngredients, pizzaDough, pizzaSauce, pizzaSize } = storeToRefs(
-      usePizzaStore()
-    );
+    const { pizzaIngredients, pizzaDough, pizzaSauce, pizzaSize } =
+      storeToRefs(usePizzaStore());
     const preparedIngredients = [];
-    Object.entries(pizzaIngredients.value).forEach(
+    (Object.entries(pizzaIngredients.value).forEach(
       ([ingredientId, quantity]) => {
         if (quantity > 0) {
           preparedIngredients.push({
@@ -93,7 +92,7 @@ export const useCartStore = defineStore("cart", () => {
         sizeId: pizzaSize.value,
         quantity: 1,
         ingredients: preparedIngredients,
-      });
+      }));
   };
 
   const sendOrder = async () => {
