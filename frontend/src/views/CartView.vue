@@ -1,5 +1,13 @@
 <template>
-  <div class="layout-form">
+  <div v-if="showPopup" class="popup" @click="showPopup = false">
+    <h2 class="popup__title">Спасибо за заказ</h2>
+    <p>Мы начали готовить Ваш заказ, скоро привезем его Вам</p>
+    <div class="popup__button">
+      <button class="button" @click="confirmOrder">Отлично, я жду!</button>
+    </div>
+  </div>
+
+  <div v-else class="layout-form">
     <main class="content cart">
       <div class="container">
         <div class="cart__title">
@@ -179,7 +187,7 @@
       </div>
 
       <div class="footer__submit">
-        <button class="button" @click="sendOrder()">Оформить заказ</button>
+        <button class="button" @click="showPopup = true">Оформить заказ</button>
       </div>
     </section>
   </div>
@@ -191,10 +199,16 @@ import { useCartStore } from "../store";
 import AppCounter from "../common/components/AppCounter.vue";
 import { useDataStore } from "../store";
 import { getPublicImage } from "@/common/helpers";
+import { ref } from "vue";
 
 const cartStore = useCartStore();
 const { cart, getSinglePizzaPrice, getOrderPrice } = storeToRefs(cartStore);
 const { sendOrder } = cartStore;
-
 const { getEntity } = storeToRefs(useDataStore());
+const showPopup = ref(false);
+
+const confirmOrder = () => {
+  sendOrder();
+  showPopup.value = false;
+};
 </script>

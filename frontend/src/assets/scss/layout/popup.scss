@@ -5,9 +5,8 @@
 .popup {
   @include pf_center-all;
 
-  z-index: 10;
-
-  display: block;
+  display: grid;
+  place-items: center;
 
   box-sizing: border-box;
   width: 420px;
@@ -55,11 +54,12 @@
 .popup__title {
   text-align: center;
 
-  font-size: 1.3em;
+  font-size: 2em;
 }
 
 .popup__button {
-  a {
+  text-align: center;
+  a, button {
     padding: 16px 32px;
   }
 }
